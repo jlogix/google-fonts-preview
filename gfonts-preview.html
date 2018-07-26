@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Fonts Preview</title>
+    <style>
+        #preview {
+            margin: 0 auto;
+            text-align: center;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preview"></div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+    $(function() {
+        $.getJSON('https://raw.githubusercontent.com/jonathantneal/google-fonts-complete/master/google-fonts.json', function(fonts) {
+          $.each(fonts, function(k, v) {
+              if (v.category!=='sans-serif') return;
+              var css = `@import url('https://fonts.googleapis.com/css?family=${k}');`;
+              $('<style/>').append(css).appendTo(document.head);
+              $(`<h1 style="font-family: '${k}'"/>`).text(`${k}: The quick brown fox goes to Disney`).appendTo($('#preview'));
+          });
+    });
+    });
+    </script>    
+</body>
+</html>
